@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>testbed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.js"></script>
+    <style>
+        #target, #events {
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+<body>
+
+<div id="target"></div>
+<textarea cols="50" rows="20" id="input"></textarea>
+<button id="apply">apply</button>
+<textarea cols="50" rows="20" id="events"></textarea>
+
+<script>
+  const cm = CodeMirror(document.getElementById('target'), {
+    value: "abc",
+  });
+  cm.on('change', function (instance, change) {
+    document.getElementById('events').value = JSON.stringify(change, null, 2);
+    console.log(change);
+  });
+  document.getElementById('apply').addEventListener('click', function (e) {
+    e.preventDefault();
+    const json = document.getElementById('input').value;
+    const input = JSON.parse(json);
+
+    const {text, from, to} = input;
+
+    text.forEach(t => cm.replaceRange(t, from, to));
+  });
+</script>
+
+</body>
+</html>
