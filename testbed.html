@@ -45,7 +45,7 @@
 
     const {text, from, to} = input;
 
-    text.forEach(t => cm.replaceRange(t, from, to));
+    cm.operation(() => cm.replaceRange(text, from, to));
   });
 </script>
 
