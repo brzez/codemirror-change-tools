@@ -22,11 +22,20 @@
 <textarea cols="50" rows="20" id="events"></textarea>
 
 <script>
+  function cleanupChange ({text, from, to}) {
+    const pos = ({line, ch}) => ({line, ch});
+    return {
+      text,
+      from: pos(from),
+      to: pos(to),
+    }
+  }
+
   const cm = CodeMirror(document.getElementById('target'), {
     value: "abc",
   });
   cm.on('change', function (instance, change) {
-    document.getElementById('events').value = JSON.stringify(change, null, 2);
+    document.getElementById('events').value = JSON.stringify(cleanupChange(change), null, 2);
     console.log(change);
   });
   document.getElementById('apply').addEventListener('click', function (e) {
