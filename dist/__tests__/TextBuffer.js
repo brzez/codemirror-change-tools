@@ -57,4 +57,38 @@ describe('TextBuffer', function () {
 
     expect(tb.build()).toBe('aaaaaaaaaaa\nbbbbfoobbbb\nccccccccccc');
   });
+
+  test('working on empty text', function () {
+    var tb = new _TextBuffer2.default('');
+    tb.change({
+      text: ["foo", "bar"],
+      from: {
+        line: 1,
+        ch: 4
+      },
+      to: {
+        line: 1,
+        ch: 7
+      }
+    });
+
+    expect(tb.build()).toBe('foo\nbar');
+  });
+
+  test('invalid from / to', function () {
+    var tb = new _TextBuffer2.default('');
+    tb.change({
+      text: ["foo"],
+      from: {
+        line: 1123,
+        ch: 4
+      },
+      to: {
+        line: 1321,
+        ch: 7
+      }
+    });
+
+    expect(tb.build()).toBe('foo');
+  });
 });

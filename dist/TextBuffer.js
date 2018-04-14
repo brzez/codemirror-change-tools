@@ -29,21 +29,30 @@ var TextBuffer = function () {
     key: "_removeText",
     value: function _removeText(line, ch, direction, length) {
       var content = this.lines[line];
+      if (!content) {
+        return false;
+      }
+
       this.lines[line] = (0, _cutText2.default)(content, ch, direction, length);
+      return true;
     }
   }, {
     key: "_write",
     value: function _write(texts, start) {
+      // todo: refactor
       texts = texts.slice();
       var line = start.line,
           ch = start.ch;
 
       var first = texts.shift();
 
-      var idx = Math.min(line, this.lines.length);
+      var idx = Math.min(line, this.lines.length - 1);
 
       var current = this.lines[idx];
-      this.lines[idx] = current.slice(0, ch) + first + current.slice(ch);
+      var startPart = current ? current.slice(0, ch) : '';
+      var endPart = current ? current.slice(ch) : '';
+
+      this.lines[idx] = startPart + first + endPart;
 
       this.lines = this.lines.slice(0, idx + 1).concat(texts, this.lines.slice(idx + 1));
     }
