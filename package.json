@@ -8,7 +8,7 @@
     "flow": "flow",
     "build": "rm -rf ./dist && babel lib -d dist && flow-copy-source lib dist"
   },
-  "author": "",
+  "author": "pawel brzezinski <pawel@brzez.com>",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
