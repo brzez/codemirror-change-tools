@@ -17,7 +17,7 @@ function inlineInsertOnly(change) {
   }
 
   // dunno
-  if (change.to.line === change.from.line && change.to.ch === change.from.line) {
+  if (change.from.line === change.to.line && change.from.ch === change.to.ch) {
     return true;
   }
 
@@ -37,8 +37,8 @@ function merge(a, b) {
     }
   };
 
-  if (b.to) {
-    change.to = b.to;
+  if (a.to) {
+    change.to = a.to;
   }
 
   return change;
