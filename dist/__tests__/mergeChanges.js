@@ -13,6 +13,10 @@ describe('mergeChanges', function () {
       from: {
         line: 1,
         ch: 1
+      },
+      to: {
+        line: 1,
+        ch: 1
       }
     };
 

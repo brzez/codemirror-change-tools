@@ -16,6 +16,11 @@ function inlineInsertOnly(change) {
     return true;
   }
 
+  // dunno
+  if (change.to.line === change.from.line && change.to.ch === change.from.line) {
+    return true;
+  }
+
   return change.from.line === change.to.line && change.from.ch + change.text[0].length === change.to.ch;
 }
 
