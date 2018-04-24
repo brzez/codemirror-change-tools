@@ -13,4 +13,13 @@ Object.defineProperty(exports, 'TextBuffer', {
   }
 });
 
+var _mergeChanges = require('./mergeChanges');
+
+Object.defineProperty(exports, 'mergeChanges', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_mergeChanges).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
