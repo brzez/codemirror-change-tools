@@ -43,7 +43,9 @@ var TextBuffer = function () {
       var line = start.line,
           ch = start.ch;
 
+
       var first = texts.shift();
+      var last = texts.pop();
 
       var idx = Math.min(line, this.lines.length - 1);
 
@@ -51,7 +53,16 @@ var TextBuffer = function () {
       var startPart = current ? current.slice(0, ch) : '';
       var endPart = current ? current.slice(ch) : '';
 
-      this.lines[idx] = startPart + first + endPart;
+      // if last === undefined: output is startPart + content + endPart
+      // else
+      // output is [startPart + first, ...lines, last + endPart]
+
+      if (last === undefined) {
+        this.lines[idx] = startPart + first + endPart;
+      } else {
+        this.lines[idx] = startPart + first;
+        texts.push(last + endPart);
+      }
 
       this.lines = this.lines.slice(0, idx + 1).concat(texts, this.lines.slice(idx + 1));
     }

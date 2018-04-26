@@ -122,4 +122,22 @@ describe('TextBuffer', function () {
 
     expect(tb.build()).toBe('1\n6');
   });
+
+  test('newline between chars', function () {
+    var tb = new _TextBuffer2.default('12');
+
+    tb.change({
+      "text": ["", ""],
+      "from": {
+        "line": 0,
+        "ch": 1
+      },
+      "to": {
+        "line": 0,
+        "ch": 1
+      }
+    });
+
+    expect(tb.build()).toBe('1\n2');
+  });
 });
